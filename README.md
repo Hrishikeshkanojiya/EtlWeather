@@ -1,48 +1,68 @@
-Overview
-========
+# Airflow Implementation Using Weather Data API with Docker, PostgreSQL, and Astro
 
-Welcome to Astronomer! This project was generated after you ran 'astro dev init' using the Astronomer CLI. This readme describes the contents of the project, as well as how to run Apache Airflow on your local machine.
+## 📌 Project Overview
+This project focuses on building a **scalable and automated data pipeline** using **Apache Airflow** to fetch, process, and store weather data from an external API. The pipeline is containerized using **Docker**, stores data in **PostgreSQL**, and is orchestrated with **Astronomer (Astro)**.
 
-Project Contents
-================
+## 🔥 Key Features
+- **Automated Data Extraction**: Fetch real-time weather data from an external API.
+- **Data Processing & Transformation**: Clean, transform, and structure the data.
+- **Database Storage**: Store structured weather data in PostgreSQL for analysis.
+- **Orchestration with Apache Airflow**: DAGs automate data ingestion and workflow execution.
+- **Docker for Containerization**: Ensures isolated and scalable execution.
+- **Monitoring with Astro**: Provides an intuitive UI for tracking DAG runs, failures, and logs.
 
-Your Astro project contains the following files and folders:
+## 🛠️ Tech Stack
+- **Apache Airflow** (Orchestration)
+- **Docker** (Containerization)
+- **PostgreSQL** (Database)
+- **Astronomer (Astro)** (Managed Airflow)
+- **Weather Data API** (Data Source)
 
-- dags: This folder contains the Python files for your Airflow DAGs. By default, this directory includes one example DAG:
-    - `example_astronauts`: This DAG shows a simple ETL pipeline example that queries the list of astronauts currently in space from the Open Notify API and prints a statement for each astronaut. The DAG uses the TaskFlow API to define tasks in Python, and dynamic task mapping to dynamically print a statement for each astronaut. For more on how this DAG works, see our [Getting started tutorial](https://www.astronomer.io/docs/learn/get-started-with-airflow).
-- Dockerfile: This file contains a versioned Astro Runtime Docker image that provides a differentiated Airflow experience. If you want to execute other commands or overrides at runtime, specify them here.
-- include: This folder contains any additional files that you want to include as part of your project. It is empty by default.
-- packages.txt: Install OS-level packages needed for your project by adding them to this file. It is empty by default.
-- requirements.txt: Install Python packages needed for your project by adding them to this file. It is empty by default.
-- plugins: Add custom or community plugins for your project to this file. It is empty by default.
-- airflow_settings.yaml: Use this local-only file to specify Airflow Connections, Variables, and Pools instead of entering them in the Airflow UI as you develop DAGs in this project.
+## 🚀 Setup and Installation
+### 1️⃣ Clone the Repository
+```sh
+ git clone https://github.com/your-repo.git
+ cd your-repo
+```
 
-Deploy Your Project Locally
-===========================
+### 2️⃣ Install Dependencies
+Make sure you have **Docker** and **Astro CLI** installed.
+```sh
+ astro dev init  # Initialize Astro project
+```
 
-1. Start Airflow on your local machine by running 'astro dev start'.
+### 3️⃣ Start the Airflow Environment
+```sh
+ astro dev start  # Start Airflow locally with Docker
+```
 
-This command will spin up 4 Docker containers on your machine, each for a different Airflow component:
+### 4️⃣ Configure Environment Variables
+Create a `.env` file and add your API credentials:
+```sh
+ WEATHER_API_KEY=your_api_key
+ POSTGRES_USER=your_username
+ POSTGRES_PASSWORD=your_password
+ POSTGRES_DB=weather_db
+```
 
-- Postgres: Airflow's Metadata Database
-- Webserver: The Airflow component responsible for rendering the Airflow UI
-- Scheduler: The Airflow component responsible for monitoring and triggering tasks
-- Triggerer: The Airflow component responsible for triggering deferred tasks
+### 5️⃣ Deploy and Monitor DAGs
+Access the Airflow UI at:
+```
+ http://localhost:8080
+```
+Enable and trigger DAGs from the UI to fetch and process weather data.
 
-2. Verify that all 4 Docker containers were created by running 'docker ps'.
+## 📊 Expected Workflow
+1. **Airflow DAG** triggers the API request for weather data.
+2. **Data Processing** cleans and structures the data.
+3. **PostgreSQL Storage** stores the transformed data.
+4. **Scheduled Runs** ensure periodic updates via Airflow.
 
-Note: Running 'astro dev start' will start your project with the Airflow Webserver exposed at port 8080 and Postgres exposed at port 5432. If you already have either of those ports allocated, you can either [stop your existing Docker containers or change the port](https://www.astronomer.io/docs/astro/cli/troubleshoot-locally#ports-are-not-available-for-my-local-airflow-webserver).
+## 🤝 Contributing
+Feel free to submit issues, pull requests, or suggestions to enhance this project!
 
-3. Access the Airflow UI for your local Airflow project. To do so, go to http://localhost:8080/ and log in with 'admin' for both your Username and Password.
+## 📜 License
+This project is licensed under the MIT License.
 
-You should also be able to access your Postgres Database at 'localhost:5432/postgres'.
-
-Deploy Your Project to Astronomer
-=================================
-
-If you have an Astronomer account, pushing code to a Deployment on Astronomer is simple. For deploying instructions, refer to Astronomer documentation: https://www.astronomer.io/docs/astro/deploy-code/
-
-Contact
-=======
-
-The Astronomer CLI is maintained with love by the Astronomer team. To report a bug or suggest a change, reach out to our support.
+---
+🚀 **Built for scalable and automated weather data ingestion!**
